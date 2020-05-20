@@ -5,7 +5,7 @@ Il progetto consiste nel realizzare un sistema di auto completamento di parole c
 Il sistema suggerisce all'utente la skill con la relazione maggiore rispetto a quelle già inserite, è anche in grado di suggerire il completamento di una skill, mentre l'utente la sta inserendo, basandosi sullo stesso principio.
 
 
-### Articoli o altre risorse
+### Articoli e altre risorse
 
 * Urra, F. (2019). Measuring Enrichment Of Word Embeddings With Subword And Dictionary Information.
 
