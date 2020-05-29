@@ -36,7 +36,7 @@ Sia il contesto $C = [c_1, ... , c_n]$ le skill già inserite e $s$ la sotto-par
 
 dove $sim(w_i, C)$ esprime la similarità tra la i-esima parola di cui $s$ è sotto-parola e le skill già inserite, si possono combinare le similarità calcolate per ogni skill nel contesto utilizzando, ad esempio, la media
 
-![equation](https://latex.codecogs.com/png.latex?\frac{\sum_{j=1}^n%20sim(w_i,%20c_j)}{n}%20\qquad%20\forall%20\%3E%20%20w_i%20\in%20W%20,%20\%3E%20c_j%20\in%20C)
+![equation](https://latex.codecogs.com/png.latex?\frac{\sum_{j=1}^n%20sim(w_i,%20c_j)}{n}%20\qquad%20\forall\%3E%20%20w_i%20\in%20W,\%3E%20c_j%20\in%20C)
 
 ### Considerazioni
 * Capire come distinguere le skill composte da più parole dalla separazione delle skill.
