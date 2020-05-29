@@ -36,7 +36,7 @@ $$
 max(sim(w_i, C)) \qquad \forall \> w_i \in W
 $$
 
-![equation] max(sim(w_i, C)) \qquad \forall \> w_i \in W
+![equation](https://latex.codecogs.com/png.latex?\max(sim(w_i,%20C))&space;\qquad\forall\%3Ew_i\in%20W)
 
 dove $sim(w_i, C)$ esprime la similarità tra la i-esima parola di cui $s$ è sotto-parola e le skill già inserite, si possono combinare le similarità calcolate per ogni skill nel contesto utilizzando, ad esempio, la media
 $$
