@@ -31,7 +31,8 @@ Carrellata di funzioni di similarità analizate in vari contesti anche con model
 ### Primo workflow del sistema
 Ad ogni input dell'utente, il sistema considera la sotto-parola inserita e seleziona le skill che contengono quella sotto-parola. Si suggerisce quindi la parola con similarità maggiore tra le parole considerate precedentemente e le skill già inserite.
 Sia il contesto ![equation](https://latex.codecogs.com/png.latex?C%20=%20[c_1,%20...%20,%20c_n]) le skill già inserite e ![equation](https://latex.codecogs.com/png.latex?s) la sotto-parola inserita dall'utente, il primo passo è quello di individuare le skill di cui ![equation](https://latex.codecogs.com/png.latex?s) è sotto-parola: ![equation](https://latex.codecogs.com/png.latex?W%20=%20[w_1,%20...%20,%20w_n]).
-Si suggerisce quindi all'utente la skill con la maggior similarità con il contesto $C$ calcolata usando la similarità del coseno:
+
+Si suggerisce quindi all'utente la skill con la maggior similarità con il contesto ![equation](https://latex.codecogs.com/png.latex?C) calcolata usando la similarità del coseno:
 
 ![equation](https://latex.codecogs.com/png.latex?\max(sim(w_i,%20C)))
 
