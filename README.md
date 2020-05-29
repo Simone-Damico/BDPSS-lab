@@ -32,16 +32,11 @@ Carrellata di funzioni di similarità analizate in vari contesti anche con model
 Ad ogni input dell'utente, il sistema considera la sotto-parola inserita e seleziona le skill che contengono quella sotto-parola. Si suggerisce quindi la parola con similarità maggiore tra le parole considerate precedentemente e le skill già inserite.
 Sia il contesto $C = [c_1, ... , c_n]$ le skill già inserite e $s$ la sotto-parola inserita dall'utente, il primo passo è quello di individuare le skill di cui $s$ è sotto-parola: $W = [w_1, ... , w_m]$. Si suggerisce quindi all'utente la skill con la maggior similarità con il contesto $C$ calcolata usando la similarità del coseno:
 
-$$
-max(sim(w_i, C)) \qquad \forall \> w_i \in W
-$$
-
 ![equation](https://latex.codecogs.com/png.latex?\max(sim(w_i,%20C))&space;\qquad\forall\%3Ew_i\in%20W)
 
 dove $sim(w_i, C)$ esprime la similarità tra la i-esima parola di cui $s$ è sotto-parola e le skill già inserite, si possono combinare le similarità calcolate per ogni skill nel contesto utilizzando, ad esempio, la media
-$$
-\frac{\sum_{j=1}^n sim(w_i, c_j)}{n} \qquad \forall \>  w_i \in W , \> c_j \in C
-$$
+
+![equation](https://latex.codecogs.com/png.latex?\frac{\sum_{j=1}^n%20sim(w_i,%20c_j)}{n}%20\qquad%20\forall%20\%3E%20%20w_i%20\in%20W%20,%20\%3E%20c_j%20\in%20C)
 
 ### Considerazioni
 * Capire come distinguere le skill composte da più parole dalla separazione delle skill.
