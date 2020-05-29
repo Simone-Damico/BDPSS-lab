@@ -1,3 +1,8 @@
+markdown: kramdown
+
+kramdown:
+  input: GFM
+  
 # BDPSS-lab
 
 Il progetto consiste nel realizzare un sistema di auto completamento di parole che rappresentano delle skill tecniche.
