@@ -1,8 +1,3 @@
-markdown: kramdown
-
-kramdown:
-  input: GFM
-  
 # BDPSS-lab
 
 Il progetto consiste nel realizzare un sistema di auto completamento di parole che rappresentano delle skill tecniche.
@@ -40,6 +35,8 @@ Sia il contesto $C = [c_1, ... , c_n]$ le skill già inserite e $s$ la sotto-par
 $$
 max(sim(w_i, C)) \qquad \forall \> w_i \in W
 $$
+
+![equation] max(sim(w_i, C)) \qquad \forall \> w_i \in W
 
 dove $sim(w_i, C)$ esprime la similarità tra la i-esima parola di cui $s$ è sotto-parola e le skill già inserite, si possono combinare le similarità calcolate per ogni skill nel contesto utilizzando, ad esempio, la media
 $$
