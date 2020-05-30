@@ -27,3 +27,21 @@ Descrive un approccio per il calcolo di similarità tra coppie di parole rappres
 
 Carrellata di funzioni di similarità analizate in vari contesti anche con modelli pre-trained come FastText o GloVe
 
+
+### Primo workflow del sistema
+Ad ogni input dell'utente, il sistema considera la sotto-parola inserita e seleziona le skill che contengono quella sotto-parola. Si suggerisce quindi la parola con similarità maggiore tra le parole considerate precedentemente e le skill già inserite.
+Sia il contesto ![equation](https://latex.codecogs.com/png.latex?C%20=%20[c_1,%20...%20,%20c_n]) le skill già inserite e ![equation](https://latex.codecogs.com/png.latex?s) la sotto-parola inserita dall'utente, il primo passo è quello di individuare le skill di cui ![equation](https://latex.codecogs.com/png.latex?s) è sotto-parola: ![equation](https://latex.codecogs.com/png.latex?W%20=%20[w_1,%20...%20,%20w_n]).
+
+Si suggerisce quindi all'utente la skill con la maggior similarità con il contesto ![equation](https://latex.codecogs.com/png.latex?C) calcolata usando la similarità del coseno:
+
+![equation](https://latex.codecogs.com/png.latex?\max(sim(w_i,%20C)))
+
+dove ![equation](https://latex.codecogs.com/png.latex?sim(w_i,%20C)) esprime la similarità tra la i-esima parola di cui ![equation](https://latex.codecogs.com/png.latex?s) è sotto-parola e le skill già inserite, si possono combinare le similarità calcolate per ogni skill nel contesto utilizzando, ad esempio, la media
+
+![equation](https://latex.codecogs.com/png.latex?\frac{\sum_{j=1}^n%20sim(w_i,%20c_j)}{n})
+
+### Considerazioni
+* Capire come distinguere le skill composte da più parole dalla separazione delle skill.
+*  Nel selezionare le parole di ![equation](https://latex.codecogs.com/png.latex?W) non si tiene in considerazione il loro embedding.
+*  Usare un altro approccio per aggregare le similarità tra la skill candidata e il contesto ![equation](https://latex.codecogs.com/png.latex?C) oltre la media.
+*  Usare un altro modo per il calcolo della similarità oltre al coseno.
