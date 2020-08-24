@@ -1,3 +1,7 @@
+# FT vectors
+data/ft_vectors_cbow_50_10_0_05.vec
+data/ft_vectors_cbow_50_10_0_05.bin
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -127,8 +131,3 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-data/~$lunga_degenza_per_Federico.xlsx
-data/.~lock.SanRaffaele.csv#
-img/San Raffaele CI 90.rar
-data/ft_vectors_cbow_50_10_0_05.vec
-data/ft_vectors_cbow_50_10_0_05.bin
