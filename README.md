@@ -1,47 +1,32 @@
-# BDPSS-lab
+# Auto-complete tool
 
-Il progetto consiste nel realizzare un sistema di auto completamento di parole che rappresentano delle skill tecniche.
+Progetto per il corso di _Big Data in Public and Social Services_ 
 
-Il sistema suggerisce all'utente la skill con la relazione maggiore rispetto a quelle già inserite, è anche in grado di suggerire il completamento di una skill, mentre l'utente la sta inserendo, basandosi sullo stesso principio.
+Il progetto consiste nel realizzare un sistema di auto completamento di parole che rappresentano delle skills tecniche definite nella tassonomia [E.S.C.O.](https://ec.europa.eu/esco/portal/skill)
+
+Il sistema è in grado di fornire suggerimeti in due possibili modi: 
+* Identifica le skills da suggerire considerando sia l'input inserito dall'utente che le skills già inserite.
+* Suggerisce le skills maggiormente correlate solamente alle skills già inserite in precedenza
+
+### Calcolo delle similarità
+Si utilizzano dei vettori di word embeddings ottenuti tramite FastText per calcolare la similarità del coseno tra le skills e l'input utente. Sia _i_ il nuovo input dell'utente, _C_ l'insieme delle skills già inserite detto _Context_. Per ognuno dei due casi espressi sopra sono calcolate in modo separato le similarità:
+- Per ogni skill _s_, si calcola la similarità del coseno tra _s_ e l'input dell'utente ottenende l'insieme _A = {(s, sim(i, s)}_
+- Per ogni skill _s_, si calcola la media delle similarità del coseno tra _s_ e le skills del _Context_ _C_ ottenendo l'insieme _B = {(s, avg_sim(s, C)}_
+- Infine si calcola la misura di similarità aggregata come compinazione lineare pesata
+_α * sim(i, s) + (1 - α) * sim(s, C)_ per ogni skill. Questo valore identifica la similarità di ogni skill sia con l'input inserito dal'utente e sia con le skills già inserite.
+
+### Architettura del sistema
+Nel _Notebook Jupyter_ son presenti le classi che implementano il sistema di auto-completamento. Una classe _Python_ gestisce l'interfaccia utente mostrando l'area di testo nella quale inserire le skills e i suggerimenti individuato come descritto precedentemente; una seconda classe _Python_ implementa la logica del sistema elaborano l'input dell'utente, calcolando le similarità e individuando i migliori suggerimenti.
+
+### Struttura della repository
+Nella cartella data si trovano la lista delle skills usate come suggerimanti e un foglio exel con i dati dello User test sottoposto agli utenti per valutare la loro interazione con il sistema.
+Nella cartella report sono presenti, in formato pdf, il report dettagliato dello sviluppo del sistema e una presentazione riassuntiva del lavoro fatto; è presente anche un video demo dell'utilizzo del sistema.
+il file _auto-complete tool project_ contiene tutto il codice del sistema.
+
+### References
+* Giabelli, A., Malandri, L., Mercorio, F., & Mezzanzanica, M. (2020). GraphLMI: A data driven system for exploring labor market information through graph databases. Multimedia Tools and Applications, 1-30.
+* Giabelli, A., Malandri, L., Mercorio, F., Mezzanzanica, M., & Seveso, A. (2020). NEO: A Tool for Taxonomy Enrichment with New Emerging Occupations.
+* CEDEFOP: Real-time labour market information on skill requirements: Setting up the eu system for online vacancy analysis. https://goo.gl/5FZS3E (2016).
+* Handbook, E. S. C. O. European Skills, Competences, Qualifications and Occupations (2017). EC Directorate E.
 
 
-### Articoli e altre risorse
-
-* Urra, F. (2019). Measuring Enrichment Of Word Embeddings With Subword And Dictionary Information.
-
-Confronto tra modelli: FastText, word2vec e un terzo modello proposto. Per la parte di FastText: calcolo della similarità con il coseno, pesatura delle sottoparole
-
-* Toshevska, M., Stojanovska, F., & Kalajdjieski, J. (2020). Comparative Analysis of Word Embeddings for Capturing Word Similarities. arXiv preprint arXiv:2005.03812.
-
-Confronto tra modelli: FastText, word2vec, GloVe. Calcolo delle somiglianze con il coseno, valutazione tra le similarità trovate e una base di conoscenza tramite: Spearman correlation coefficient, Pearson correlation coefficient e Kendall’s tau correlation coefficient. GloVe e FastText migliori. Nel nostro caso non si ha una base di conoscenza
-
-* Faruqui, M., Tsvetkov, Y., Rastogi, P., & Dyer, C. (2016). Problems with evaluation of word embeddings using word similarity tasks. arXiv preprint arXiv:1605.02276.
-
-Analisi di problemi e situazioni da tener presente nel calcolo della similarità usando, in particolare, il coseno
-
-* Li, D., & Summers-Stay, D. (2017). Dual embeddings and metrics for relational similarity. In IWCS 2017—12th International Conference on Computational Semantics—Short papers.
-
-Descrive un approccio per il calcolo di similarità tra coppie di parole rappresentate mediante i vettori delle parole che formano tali coppie 
-
-* https://medium.com/@adriensieg/text-similarities-da019229c894
-
-Carrellata di funzioni di similarità analizate in vari contesti anche con modelli pre-trained come FastText o GloVe
-
-
-### Primo workflow del sistema
-Ad ogni input dell'utente, il sistema considera la sotto-parola inserita e seleziona le skill che contengono quella sotto-parola. Si suggerisce quindi la parola con similarità maggiore tra le parole considerate precedentemente e le skill già inserite.
-Sia il contesto ![equation](https://latex.codecogs.com/png.latex?C%20=%20[c_1,%20...%20,%20c_n]) le skill già inserite e ![equation](https://latex.codecogs.com/png.latex?s) la sotto-parola inserita dall'utente, il primo passo è quello di individuare le skill di cui ![equation](https://latex.codecogs.com/png.latex?s) è sotto-parola: ![equation](https://latex.codecogs.com/png.latex?W%20=%20[w_1,%20...%20,%20w_n]).
-
-Si suggerisce quindi all'utente la skill con la maggior similarità con il contesto ![equation](https://latex.codecogs.com/png.latex?C) calcolata usando la similarità del coseno:
-
-![equation](https://latex.codecogs.com/png.latex?\max(sim(w_i,%20C)))
-
-dove ![equation](https://latex.codecogs.com/png.latex?sim(w_i,%20C)) esprime la similarità tra la i-esima parola di cui ![equation](https://latex.codecogs.com/png.latex?s) è sotto-parola e le skill già inserite, si possono combinare le similarità calcolate per ogni skill nel contesto utilizzando, ad esempio, la media
-
-![equation](https://latex.codecogs.com/png.latex?\frac{\sum_{j=1}^n%20sim(w_i,%20c_j)}{n})
-
-### Considerazioni
-* Capire come distinguere le skill composte da più parole dalla separazione delle skill.
-*  Nel selezionare le parole di ![equation](https://latex.codecogs.com/png.latex?W) non si tiene in considerazione il loro embedding.
-*  Usare un altro approccio per aggregare le similarità tra la skill candidata e il contesto ![equation](https://latex.codecogs.com/png.latex?C) oltre la media.
-*  Usare un altro modo per il calcolo della similarità oltre al coseno.
